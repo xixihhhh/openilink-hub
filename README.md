@@ -19,6 +19,36 @@
 
 ---
 
+## 这是什么？
+
+2026 年 3 月，微信正式推出 **ClawBot 插件**，底层通过 **iLink 协议**（`ilinkai.weixin.qq.com`）开放了个人微信号的 Bot API —— 这意味着你可以**合法地**让程序收发微信消息。
+
+**OpenILink Hub 就是基于 iLink 协议构建的消息管理平台。** 它帮你把"原始的消息收发能力"变成"可管理、可路由、可扩展的消息系统"：
+
+```
+微信 ClawBot 插件 (用户在微信中安装)
+       │
+       ▼ iLink 协议 (微信官方 Bot API)
+       │
+  OpenILink SDK (7 种语言封装)
+       │
+       ▼
+ ┌─────────────────────────┐
+ │    OpenILink Hub        │  ◀── 本项目
+ │  多 Bot 管理 + 消息路由  │
+ └────────┬────────────────┘
+          │
+    ┌─────┼──────┐
+    ▼     ▼      ▼
+ WebSocket  Webhook  AI 自动回复
+ (实时推送) (HTTP回调) (接 LLM)
+    │
+    ▼
+ 你的业务系统 / OpenClaw / Telegram / ...
+```
+
+> **和 OpenClaw 的关系**：OpenClaw 是一个 AI Agent Gateway 框架，微信 ClawBot 原生支持对接 OpenClaw。OpenILink Hub 通过 [openclaw-channel-openilink](https://github.com/openilink/openclaw-channel-openilink) 适配器可以与 OpenClaw 互通，但 Hub 本身**不依赖 OpenClaw**，它是一个独立的、更通用的消息管理平台。你可以用它对接任何下游服务。
+
 ## 为什么选择 OpenILink Hub？
 
 | | OpenILink Hub | 传统方案 |
@@ -265,7 +295,9 @@ Bot 连接通过 Provider 接口抽象（`internal/provider/`），当前实现�
 
 ## English
 
-**OpenILink Hub** is a self-hosted, open-source WeChat Bot management and message relay platform. It enables you to bind WeChat accounts via QR code scanning and forward messages to downstream services through WebSocket, Webhook (with JavaScript middleware), or AI auto-reply.
+**OpenILink Hub** is a self-hosted, open-source WeChat Bot management and message relay platform built on top of the **iLink protocol** — the official WeChat ClawBot Bot API launched in March 2026.
+
+It turns WeChat's raw messaging capability into a manageable, routable, and extensible system: bind multiple WeChat accounts via QR code, then forward messages to your services through WebSocket, Webhook (with JavaScript middleware), or AI auto-reply. It works independently and can also integrate with OpenClaw via the [openclaw-channel-openilink](https://github.com/openilink/openclaw-channel-openilink) adapter.
 
 **Key Features:** Multi-bot management, Passkey (WebAuthn) passwordless login, GitHub/LinuxDo OAuth, JavaScript plugin engine, plugin marketplace, and official SDKs for Go, Node.js, Python, PHP, Java, C#, and Lua.
 
