@@ -2,10 +2,11 @@
 
 # OpenILink Hub
 
-### Self-hosted WeChat Bot Management & Message Relay Platform
+**微信 ClawBot iLink 协议的开源消息管理平台**<br>
+**Open-source message management platform for WeChat ClawBot (iLink protocol)**
 
-开源、可自托管的多微信 Bot 管理平台，支持 WebSocket / Webhook / AI 自动回复三种消息下发方式，<br>
-内置 Passkey 无密码登录、JavaScript 插件引擎、7 种语言 SDK，轻松接入你的业务系统。
+扫码绑定微信号，消息实时转发到你的服务 —— 支持 WebSocket / Webhook / AI 自动回复<br>
+多 Bot 集中管理 · JavaScript 插件引擎 · 7 种语言 SDK · Passkey 无密码登录
 
 [![License](https://img.shields.io/github/license/openilink/openilink-hub?style=flat-square)](LICENSE)
 [![Go](https://img.shields.io/badge/Go-1.25-00ADD8?style=flat-square&logo=go&logoColor=white)](https://go.dev)
@@ -13,7 +14,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](docker-compose.yml)
 [![GitHub Stars](https://img.shields.io/github/stars/openilink/openilink-hub?style=flat-square&logo=github)](https://github.com/openilink/openilink-hub/stargazers)
 
-[English](#english) · [在线体验](https://hub.openilink.com) · [快速开始](#快速开始) · [SDK 文档](#sdk-生态) · [插件市场](#插件系统)
+[在线体验](https://hub.openilink.com) · [快速开始](#快速开始) · [SDK 文档](#sdk-生态) · [插件市场](#插件系统) · [English](#english)
 
 </div>
 
@@ -21,9 +22,11 @@
 
 ## 这是什么？
 
-2026 年 3 月，微信正式推出 **ClawBot 插件**，底层通过 **iLink 协议**（`ilinkai.weixin.qq.com`）开放了个人微信号的 Bot API —— 这意味着你可以**合法地**让程序收发微信消息。
+2026 年 3 月，微信正式推出 **ClawBot 插件**，底层通过 **iLink 协议**（`ilinkai.weixin.qq.com`）开放了个人微信号的 Bot API —— 你可以**合法地**让程序收发微信消息了。
 
-**OpenILink Hub 就是基于 iLink 协议构建的消息管理平台。** 它帮你把"原始的消息收发能力"变成"可管理、可路由、可扩展的消息系统"：
+**但 iLink 只是一个消息通道**：你扫码、收消息、发回复，仅此而已。要真正用起来，你还需要管理多个 Bot、路由消息到不同服务、处理媒体文件、配置过滤规则……
+
+**OpenILink Hub 就是干这个的。** 它把 iLink 的原始能力包装成一个完整的消息管理平台：
 
 ```
 微信 ClawBot 插件 (用户在微信中安装)
@@ -47,7 +50,16 @@
  你的业务系统 / OpenClaw / Telegram / ...
 ```
 
-> **和 OpenClaw 的关系**：OpenClaw 是一个 AI Agent Gateway 框架，微信 ClawBot 原生支持对接 OpenClaw。OpenILink Hub 通过 [openclaw-channel-openilink](https://github.com/openilink/openclaw-channel-openilink) 适配器可以与 OpenClaw 互通，但 Hub 本身**不依赖 OpenClaw**，它是一个独立的、更通用的消息管理平台。你可以用它对接任何下游服务。
+<details>
+<summary><b>和 OpenClaw 是什么关系？</b></summary>
+
+OpenClaw 是一个 AI Agent Gateway 框架，微信 ClawBot 插件原生支持对接 OpenClaw。
+
+OpenILink Hub **不依赖 OpenClaw**，它是一个独立的、更通用的消息管理平台。你可以通过 [openclaw-channel-openilink](https://github.com/openilink/openclaw-channel-openilink) 适配器将两者打通，也可以完全不用 OpenClaw，直接用 Hub 对接你自己的服务。
+
+简单说：**OpenClaw 专注 AI Agent，OpenILink Hub 专注消息管理和分发**，两者互补但互不依赖。
+
+</details>
 
 ## 为什么选择 OpenILink Hub？
 
